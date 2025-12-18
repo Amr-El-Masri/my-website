@@ -224,7 +224,7 @@ section {
 
 .about-content {
     max-width: 800px;
-    background: rgb(101, 101, 117);
+    background: rgba(10, 10, 10, 0.85);
     padding: 40px 50px;
     border-radius: 16px;
     box-shadow: 0 12px 36px rgba(0,0,0,0.12);
