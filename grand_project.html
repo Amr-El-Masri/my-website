@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAND Decoder | Project Details</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="dark-theme">
+
+    <!-- Menu Toggle -->
+    <input type="checkbox" id="menu-toggle" />
+
+    <!-- Hamburger -->
+    <label for="menu-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+
+    <!-- Overlay -->
+    <label for="menu-toggle" class="overlay"></label>
+
+    <!-- Sidebar navigation -->
+    <nav class="sidebar">
+        <ul>
+            <li><a href="index.html" onclick="document.getElementById('menu-toggle').checked = false;">Home</a></li>
+            <li><a href="about.html" onclick="document.getElementById('menu-toggle').checked = false;">About Me</a></li>
+            <li><a href="education.html" onclick="document.getElementById('menu-toggle').checked = false;">Education</a></li>
+            <li><a href="experience.html" onclick="document.getElementById('menu-toggle').checked = false;">Experience</a></li>
+            <li><a href="projects.html" class="active" onclick="document.getElementById('menu-toggle').checked = false;">Projects</a></li>
+            <li><a href="skills.html" onclick="document.getElementById('menu-toggle').checked = false;">Skills</a></li>
+            <li><a href="contact.html" onclick="document.getElementById('menu-toggle').checked = false;">Contact</a></li>
+            <li><a href="research.html" onclick="document.getElementById('menu-toggle').checked = false;">research</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="project-detail">
+        <h1 class="project-title">Optimizing a Pipelined Datapath for GRAND</h1>
+
+        <!-- Overview -->
+        <section class="project-item">
+            <h2>Project Overview</h2>
+            <p>
+                This project focuses on the design and optimization of the 
+                <strong>Guessing Random Additive Noise Decoding (GRAND)</strong> algorithm for 
+                forward error correction. GRAND is a <em>noise-centric</em>, code-agnostic decoding 
+                approach that recovers transmitted data by guessing likely noise patterns rather 
+                than enumerating codewords.
+            </p>
+            <p>
+                The decoder was implemented in <strong>behavioral Verilog</strong> and evaluated on a 
+                <strong>(7,4) Hamming code</strong>. Both a sequential baseline and an optimized 
+                <strong>five-stage pipelined architecture</strong> were developed and compared to study 
+                latency, throughput, and control complexity.
+            </p>
+        </section>
+
+        <!-- Technical Summary -->
+        <section class="project-item">
+            <h2>Technical Summary</h2>
+            <ul>
+                <li>Target code: (7,4) Hamming code</li>
+                <li>Decoding method: Hard GRAND</li>
+                <li>Implementation language: Verilog</li>
+                <li>Verification tools: Icarus Verilog, EDA Playground</li>
+                <li>Architectures: Sequential and pipelined datapath</li>
+            </ul>
+        </section>
+
+        <!-- Core Components -->
+        <section class="project-item">
+            <h2>Core Components</h2>
+            <p>
+                The GRAND decoder is composed of modular building blocks that closely follow 
+                the theoretical algorithm:
+            </p>
+            <ul>
+                <li>
+                    <strong>Noise Effect Pattern (NEP) Generator:</strong>
+                    Generates noise vectors in increasing Hamming weight order, prioritizing 
+                    more likely noise patterns.
+                </li>
+                <li>
+                    <strong>XOR Module:</strong>
+                    Applies the guessed noise to the received word to compute a candidate codeword.
+                </li>
+                <li>
+                    <strong>Codebook Membership Check (CMC):</strong>
+                    Verifies candidate validity using syndrome checking with a parity-check matrix.
+                </li>
+                <li>
+                    <strong>Control Unit:</strong>
+                    Tracks guesses, enforces abandonment threshold, and determines when decoding stops.
+                </li>
+            </ul>
+        </section>
+        <pre class="code-snippet">
+            <strong>The hard GRAND algorithm:</strong>
+
+            Require: Received (possibly corrupted) bits ˆc; ordered noise-generating function Π;
+            abandonment threshold B
+            Ensure: Decoded ¯cGRAND, ¯bGRAND
+            1: k ← 0
+            2: while k < 2N do
+            3: k ← k + 1
+            4: w ← Π(k) ▷ kth likely noise sequence
+            5: if ˆc ⊖ w ∈ C or k = B then
+            6: ¯cGRAND ← ˆc ⊖ w
+            7: return ¯cGRAND, ¯bGRAND
+            8: end if
+            9: end while
+        </pre>        
+
+        <!-- Pipelined Architecture -->
+        <section class="project-item">
+            <h2>Pipelined Datapath Design</h2>
+            <p>
+                To improve throughput, the decoding process was decomposed into a 
+                <strong>five-stage pipeline</strong>:
+            </p>
+            <ul>
+                <li>NEP generation</li>
+                <li>Noise application and XOR computation</li>
+                <li>Codebook membership check</li>
+                <li>Decision and control logic</li>
+                <li>Write-back and output handling</li>
+            </ul>
+            <p>
+                The main challenge in the pipelined design was ensuring correct alignment of 
+                <code>w</code>, <code>ĉ</code>, and candidate codewords across stages. 
+                This was solved using stage registers and valid flags to prevent misaligned 
+                acceptance and false outputs.
+            </p>
+        </section>
+
+        <!-- Performance Evaluation -->
+        <section class="project-item">
+            <h2>Performance Evaluation</h2>
+            <ul>
+                <li>Sequential GRAND latency: ~5–7 cycles per message</li>
+                <li>Pipelined GRAND latency: ~6–8 cycles per message</li>
+                <li>Improved throughput for batch decoding due to pipeline overlap</li>
+            </ul>
+            <p>
+                While the sequential decoder is faster for isolated messages, the pipelined 
+                design significantly outperforms it when decoding streams of messages, 
+                demonstrating the effectiveness of hardware parallelism.
+            </p>
+        </section>
+
+        <!-- Lessons Learned -->
+        <section class="project-item">
+            <h2>Lessons Learned</h2>
+            <ul>
+                <li>Correct pipeline alignment is critical for functional correctness</li>
+                <li>Small matrix definition errors can invalidate decoding results</li>
+                <li>Pipelining improves throughput but increases control complexity</li>
+                <li>GRAND accuracy is sensitive to early stopping criteria</li>
+            </ul>
+        </section>
+
+        <!-- Future Work -->
+        <section class="project-item">
+            <h2>Future Extensions</h2>
+            <p>
+                Potential improvements include implementing 
+                <strong>soft GRAND</strong> using confidence-ranked noise guesses and 
+                exploring <strong>CRC-aided GRAND</strong> to resolve ambiguity between 
+                multiple valid codewords.
+            </p>
+        </section>
+
+        <!-- Buttons -->
+        <div class="project-buttons">
+            <a href="https://github.com/Amr-El-Masri/GRAND-decoder" target="_blank" class="btn">View Code on GitHub</a>
+            <a href="projects.html" class="btn">Back to Projects</a>
+        </div>
+    </main>
+
+</body>
+</html>

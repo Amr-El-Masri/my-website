@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AUBoutique_project - Project Details</title>
+    <title>AUBoutique | Project Details</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="dark-theme">
 
-    <!-- Hidden checkbox toggle -->
+    <!-- Menu Toggle -->
     <input type="checkbox" id="menu-toggle" />
 
-    <!-- Hamburger icon -->
+    <!-- Hamburger -->
     <label for="menu-toggle" class="hamburger">
         <span></span>
         <span></span>
@@ -21,49 +21,101 @@
     <!-- Overlay -->
     <label for="menu-toggle" class="overlay"></label>
 
-    <!-- Sidebar -->
+    <!-- Sidebar navigation -->
     <nav class="sidebar">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Me</a></li>
-            <li><a href="education.html">Education</a></li>
-            <li><a href="experience.html">Experience</a></li>
-            <li><a href="projects.html" class="active">Projects</a></li>
-            <li><a href="skills.html">Skills</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="research.html">Research</a></li>
+            <li><a href="index.html" onclick="document.getElementById('menu-toggle').checked = false;">Home</a></li>
+            <li><a href="about.html" onclick="document.getElementById('menu-toggle').checked = false;">About Me</a></li>
+            <li><a href="education.html" onclick="document.getElementById('menu-toggle').checked = false;">Education</a></li>
+            <li><a href="experience.html" onclick="document.getElementById('menu-toggle').checked = false;">Experience</a></li>
+            <li><a href="projects.html" class="active" onclick="document.getElementById('menu-toggle').checked = false;">Projects</a></li>
+            <li><a href="skills.html" onclick="document.getElementById('menu-toggle').checked = false;">Skills</a></li>
+            <li><a href="contact.html" onclick="document.getElementById('menu-toggle').checked = false;">Contact</a></li>
+            <li><a href="research.html" onclick="document.getElementById('menu-toggle').checked = false;">research</a></li>
         </ul>
     </nav>
 
-    <!-- Main project detail content -->
+    <!-- Main Content -->
     <main class="project-detail">
-        <h1 class="project-title">AUBoutique: The AUB Marketplace</h1>
+        <h1 class="project-title">AUBoutique: A Marketplace for the AUB Community</h1>
 
+        <!-- Images + Overview -->
         <div class="project-content">
+
+            <!-- Image Grid -->
             <div class="project-images">
-                <img src="images/pic1.jpg" alt="Portfolio Screenshot 1">
-                <img src="images/pic1.jpg" alt="Portfolio Screenshot 2">
+                <img src="images/auboutique_registration_1.jpeg" alt="AUBoutique login interface">
+                <img src="images/auboutique_registration_2.jpeg" alt="Marketplace product listings">
+                <img src="images/auboutique_login_1.jpeg" alt="Chat and messaging feature">
+                <img src="images/auboutique_login_2.jpeg" alt="Sell item and upload image">
             </div>
 
+            <!-- Description -->
             <div class="project-text">
                 <p>
-                    This marketplace app was created to showcase my skills in full-stack development.
-                    Built with Python and using SQL, it constitutes a shared space for the AUB community (or any university or even other communities) to list items for sale and browse items listed by other AUB members in order to create a platform for members to find whar they're looking for at discounted prices and reduce the need to buy new products thus reducing unecesary waste. The app features authentication upon sign in, a user-friendly GUI, and the option to directly message the buyer/seller of the product of interest.
+                    <strong>AUBoutique</strong> is a full-stack marketplace application designed for the 
+                    American University of Beirut (AUB) community. The platform enables students and members to buy, sell, and 
+                    exchange items within a trusted university network, encouraging sustainable consumption and 
+                    reducing unnecessary waste.
                 </p>
+
+                <p>
+                    The system is built using a <strong>hybrid client–server and peer-to-peer architecture</strong>. 
+                    Core services such as authentication, product management, messaging, and database operations 
+                    are handled by a multithreaded TCP server, while optional peer-to-peer communication allows users 
+                    to chat directly without server relay.
+                </p>
+
                 <ul>
-                    <li>User Accounts & Authentication</li>
-                    <li>Product Listings & Search</li>
-                    <li>Peer to Peer messaging</li>
-                    <li>Interactive GUI</li>
+                    <li>Secure user authentication with password hashing (bcrypt)</li>
+                    <li>Concurrent server and client handling using multithreading</li>
+                    <li>Marketplace with product listings, search, filtering, and ratings</li>
+                    <li>Direct peer-to-peer and server-based messaging</li>
                 </ul>
             </div>
         </div>
 
-        <pre class="code-snippet">
-/* Example from the project */
+        <!-- Architecture Section -->
+        <section class="project-item">
+            <h2>System Architecture</h2>
+            <p>
+                AUBoutique follows a hybrid communication model. Each client connects to a central server responsible 
+                for authentication, database access, and coordination. The server maintains active connections using 
+                TCP sockets and creates a dedicated thread for every connected user.
+            </p>
+            <p>
+                For real-time communication, users may either exchange messages through the server or initiate a 
+                peer-to-peer connection by retrieving the recipient’s IP and port from the server. This design 
+                balances reliability with scalability and reduces server load during active chats.
+            </p>
+        </section>
 
-        </pre>
+        <!-- Key Features -->
+        <section class="project-item">
+            <h2>Key Features</h2>
+            <ul>
+                <li>User registration, login, and authentication</li>
+                <li>Product selling, purchasing, and inventory management</li>
+                <li>Image upload and download using chunked TCP transfers</li>
+                <li>Product ratings and average rating computation</li>
+                <li>Search, filtering by owner, and partial currency conversion</li>
+                <li>Creative budgeting feature to help students manage spending</li>
+            </ul>
+        </section>
 
+        <!-- Technologies -->
+        <section class="project-item">
+            <h2>Technologies Used</h2>
+            <ul>
+                <li>Python (Sockets, Multithreading)</li>
+                <li>TCP/IP Networking</li>
+                <li>SQLite for database management</li>
+                <li>Bcrypt for secure password hashing</li>
+                <li>Client-server & peer-to-peer communication models</li>
+            </ul>
+        </section>
+
+        <!-- Buttons -->
         <div class="project-buttons">
             <a href="https://github.com/Amr-El-Masri/AUBoutique" target="_blank" class="btn">View Code on GitHub</a>
             <a href="projects.html" class="btn">Back to Projects</a>

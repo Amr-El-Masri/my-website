@@ -112,13 +112,6 @@ main {
     transition: margin-left 0.3s ease;
 }
 
-/* Optional: push main content to the right when sidebar open */
-/* Uncomment if you want main content to move */
-/*
-#menu-toggle:checked ~ main {
-    margin-left: 200px;
-}
-*/
 
 section {
     padding: 50px 0;
@@ -541,18 +534,6 @@ section {
   margin-bottom: 12px;
 }
 
-/* Project link 
-.project-link {
-  display: inline-block;
-  color: #66ccff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-.project-link:hover {
-  color: #3399ff;
-  text-decoration: underline;
-}*/
 
 /* Project buttons container */
 .project-buttons {

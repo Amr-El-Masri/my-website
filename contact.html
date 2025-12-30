@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Amr El Masri-Contact</title>
+    <title>Amr El Masri - Contact</title>
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -18,7 +18,7 @@
         <span></span>
     </label>
 
-    <!-- Overlay that appears when sidebar is open -->
+    <!-- Overlay -->
     <label for="menu-toggle" class="overlay"></label>
 
     <!-- Sidebar navigation -->
@@ -35,34 +35,57 @@
         </ul>
     </nav>
 
+    <!-- Main content -->
+    <main class="contact-main">
+        <section class="contact-content">
+            <h1>Contact Me</h1>
 
-  <!-- Main content -->
-  <main class="contact-main">
-    <section class="contact-content">
-      <h1>Contact Me</h1>
+            <!-- Formspree form -->
+            <form
+                class="contact-form"
+                action="https://formspree.io/f/xzdboqow"
+                method="POST"
+            >
+                <!-- Hidden subject -->
+                <input type="hidden" name="_subject" value="New message from portfolio contact form" />
 
-      <form class="contact-form" action="#" method="POST">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your full name" required />
+                <!-- Reply-to email -->
+                <input type="hidden" name="_replyto" value="" />
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required />
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                    oninput="this.form._replyto.value = this.value"
+                />
 
-        <button type="submit">Send Message</button>
-      </form>
+                <label for="message">Message</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    placeholder="Write your message here..."
+                    required
+                ></textarea>
 
-      <div class="contact-info">
-        <h2>Other Ways to Reach Me</h2>
-        <p>Email: <a href="mailto:your.email@example.com">almasriamr1@gmail.com</a></p>
-        <p>Phone: <a href="tel:+1234567890">+961 70 237 053</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/amr-el-masri</a></p>
-        <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/Amr-El-Masri</a></p>
-      </div>
-    </section>
-  </main>
+                <button type="submit">Send Message</button>
+            </form>
+
+            <div class="contact-info">
+                <h2>Other Ways to Reach Me</h2>
+                <p>Email: <a href="mailto:almasriamr1@gmail.com">almasriamr1@gmail.com</a></p>
+                <p>Phone: <a href="tel:+96170237053">+961 70 237 053</a></p>
+                <p>LinkedIn: <a href="https://linkedin.com/in/amr-el-masri" target="_blank">linkedin.com/in/amr-el-masri</a></p>
+                <p>GitHub: <a href="https://github.com/Amr-El-Masri" target="_blank">github.com/Amr-El-Masri</a></p>
+            </div>
+        </section>
+    </main>
 
 </body>
 </html>
